@@ -10,7 +10,7 @@ import string
 stripe.api_key = settings.STRIPE_SECRET
 
 def create_ref_code():
-  ''+join(random.choices(string.ascii_uppercase + string.digits, k=15))
+  return ''.join(random.choices(string.ascii_uppercase + string.digits, k=15))
   
 
 def add_to_cart(request, work_slug):
@@ -44,30 +44,32 @@ def checkout(request):
   # complete the order (ref code and item_checked to true)
     
     order.ref_code = create_ref_code()
+    token = request.POST.get('stripeToken')
     
   # create a stripe charge
     charge = stripe.Charge.create(
-      amount=order.get_total() * 100, #cents
-      curency="eur",
-      source="tok_amex", # obtained with Stripe.js
+      amount=int(order.get_total() * 100), #cents
+      currency="eur",
+      source=token, # obtained with Stripe.js
       description= f"Charge for {request.user.username}"
     )
+    print(charge)
   
   # create the moneypayment and connect it to the order
     
-    money_payment = Payment()
-    money_payment.order = order
-    money_payment.stripe_charge_id = charge.id 
-    money_payment.total_amount = order.get_total()
-    money_payment.save()
+  #   money_payment = Payment()
+  #   money_payment.order = order
+  #   money_payment.stripe_charge_id = charge.id 
+  #   money_payment.total_amount = order.get_total()
+  #   money_payment.save()
 
-    # add the work to the users worl list
-    works = [item.work for item in order.items.all()]
-    for work in works:
-      request.user.userlibrary.items.add()
+  #   # add the work to the users worl list
+  #   works = [item.work for item in order.items.all()]
+  #   for work in works:
+  #     request.user.userlibrary.items.add()
     
   
-  # redirect to the user profile
+  # # redirect to the user profile
     return redirect("/account/profile/")
   
   context = {
