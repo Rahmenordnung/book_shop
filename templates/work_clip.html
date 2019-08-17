@@ -1,0 +1,21 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-header">{{ work.title }}</div>
+    <img src="..{{ work.cover.url }}." class="card-img-top" alt="...">
+    <div class="card-body">
+      <p class="card-text">Published{{ work.publication_date }}</p>
+  </div>
+  {% if work_status != 'owned' %}
+    <div class="card-footer">
+      {% if work_status == 'in_cart_check' %}
+        <a href= "{% url 'cart:remove-from-cart' work.slug %}" class="btn btn-default btn-block">
+          Remove from cart
+        </a>
+      {% else %}
+        <a href= "{% url 'cart:add-to-cart' work.slug  %}"class="btn btn-warning btn-block">
+          Add to cart
+        </a>
+      {% endif %}
+      </div>
+    {% endif %}
+    
+</div>

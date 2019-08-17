@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block breadcrumb %}
+  
+    <li class="breadcrumb-item " aria-current="page">
+      <a href="{% url 'literature:works_list' %}">Works list</a>
+    </li>
+    <li class="breadcrumb-item " aria-current="page">
+      <a href="{{ text.part.work.get_absolute_url }}">{{ text.part.work.title }}</a>
+    </li>
+    <li class="breadcrumb-item" aria-current="page">
+    <a href="{{ text.part.get_absolute_url }}">{{ text.part.title }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+    {{ text.title }}
+    </li>
+
+{% endblock breadcrumb %}
+
+{% block content %}
+  <div class="row">
+    <main class="col-md-4">
+      {% include "work_clip.html" with work=text.part.work %} 
+    </main>
+  <aside class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+          Essays details
+        </div>
+
+        {% if work_status == 'owned' %}
+
+
+  {% for essay in text.essay_set.all %}
+      <div class="accordion" id="toggle-{{ essay.essay_number }}">
+        <div class="card">
+          <div class="card-header" id="heading-{{ essay.essay_number }}">
+            <h2 class="mb-0">
+              <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse-{{ essay.essay_number }}" aria-expanded="true" aria-controls="collapse-{{ essay.essay_number }}">
+                This is essay number: {{ essay.essay_number }}
+              </button>
+            </h2>
+        </div>
+    <div id="collapse-{{ essay.essay_number }}" class="collapse" aria-labelledby="heading-{{ essay.essay_number }}" data-parent= "#toggle-{{ essay.essay_number }}">
+      <div class="card-body">
+      <img src="{{ essay.image.url }}" class="card-img-top" alt="...">
+      </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+
+{% else %}
+<div class="text-center">
+  <h4>Sorry to hear that! You can´t read this text yet. </h4>
+  <h4>You must <a href="#">buy this work</a> in order to view the essay related to it</h4>
+  <img src="{% static 'images/reading_stop.jpg' %}" />
+  {% endif %}
+</div>
+        
+           {% comment %} {% for essay in text.essay_set.all %}
+            <li class="list-group-item">
+              <a href="{{ text.get_absolute_url }}">
+                Essays {{ essay.essay_number }}
+              </a>
+            </li>
+          {% endfor %}  {% endcomment %}
+        
+      </div>  
+    </aside>
+  </div>    
+{% endblock content %}

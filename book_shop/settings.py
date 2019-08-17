@@ -1,6 +1,5 @@
-
-
 import os
+import env
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +26,21 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # allauth packages
+    
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    
+    # crispyforms
+    'crispy_forms',
+    
+    
+    # personal apps
     'literature',
+    'shopping_list'
 ]
 
 MIDDLEWARE = [
@@ -45,7 +58,7 @@ ROOT_URLCONF = 'book_shop.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS':[os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -115,3 +128,31 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
+
+# Django Allauth settings
+AUTHENTICATION_BACKENDS = (
+    
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+)
+
+SITE_ID = 1
+
+#Stripe keys
+
+STRIPE_PUBLISHABLE = os.getenv("STRIPE_PUBLISHABLE")
+STRIPE_SECRET = os.getenv("STRIPE_SECRET")
+
+
+#Django cryspyforms settings
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+LOGIN_REDIRECT_URL = '/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+

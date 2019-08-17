@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item active" aria-current="page">Works list</li>
+{% endblock breadcrumb %}
+
+{% block content %}
+    
+  <h1>This is the Theater Works list</h1>
+  <hr />
+  {% for work in queryset %}
+  <div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">{{work.title}}</h5>
+    <h6 class="card-subtitle mb-2 text-muted">{{work.publication_date}}</h6>
+    <p class="card-text">
+      {% for maestro in work.maestros.all %}
+          <span>{{ maestro }}</span>
+          {% if work.maestros.count > 1 %} | {% endif %} 
+      {% endfor %}  
+    </p>
+    <a href="{{ work.get_absolute_url }}" class="card-link">{{ work }}</a>
+  </div>
+  </div>
+  {% endfor %}
+
+{% endblock %}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Order LIst</h1>
+<hr />
+
+<table class="table table-hover table-bordered text-center">
+    <tr class="text-center">
+        <th>n°.</th>
+        <th>Title</th>
+        <th>Price</th>
+    </tr>
+    {% for item in order.items.all %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ item.work.title }}
+        <span>
+        <a href="{% url 'cart:remove-from-cart' item.work.slug %}" class="text-danger">
+            <i class="fas fa-trash"></i>
+        </a>
+        </span></td>
+        <td>€{{ item.work.price }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+    <td colspan="3">
+        There are no items in your cart
+    </td>
+    </tr>
+    {% endfor %}
+    {% if order.get_total %}
+    <tr>
+    <td colspan="2">
+        <strong class="pull-right">Order total: </strong>
+    </td>
+    <td colspan="1">
+        <strong>${{ order.get_total }}</strong>
+    </td>
+    </tr>
+    {% endif %}
+    <tr>
+        <td colspan="3">
+            <a href="{% url 'literature:works_list' %}" class="btn btn-warning pull-left">
+            {% if order %}
+                Continue shopping
+            {% else %}
+                Add items to your cart
+            {% endif %}
+            </a>
+        </td>
+    </tr>
+     {% if order.get_total %}
+     <tr>
+        <td colspan="3">
+            <a href="{% url 'cart:checkout' %}" class="btn btn-primary pull-left">
+                Checkout
+            </a>
+        </td>
+    </tr>  
+    {% endif %} 
+</table>
+
+{% endblock content %}

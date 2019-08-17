@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block breadcrumb %}
+    <li class="breadcrumb-item " aria-current="page">
+      <a href="{% url 'literature:works_list' %}">Works list</a>
+    </li>
+    <li class="breadcrumb-item " aria-current="page">
+      <a href="{{ part.work.get_absolute_url }}">{{ part.work.title }}</a>
+    </li>
+    <li class="breadcrumb-item active" aria-current="page">
+    {{ part }}
+    </li>
+{% endblock breadcrumb %}
+
+{% block content %}
+<div class="row">
+  <main class="col-md-4">
+    {% include "work_clip.html" with work=part.work %} 
+
+  </main>
+
+  <aside class="col-md-8">
+    <div class="card">
+        <div class="card-header">
+          Detail of a specific part of a work
+        </div>
+        <ul class="list-group list-group-flush">
+          {% for text in part.text_set.all %}
+            <li class="list-group-item">
+              <a href="{{ text.get_absolute_url }}">
+                {{ text.text_number }}. {{ text.title }}
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>  
+    </aside>
+  </div>
+{% endblock content %}
