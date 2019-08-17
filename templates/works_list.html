@@ -1,14 +1,21 @@
 {% extends "base.html" %}
 
 {% block breadcrumb %}
-    <li class="breadcrumb-item active" aria-current="page">Works list</li>
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item active" aria-current="page">Works list</li>  
+    </ol>
+    </nav>
+
 {% endblock breadcrumb %}
 
 {% block content %}
     
   <h1>This is the Theater Works list</h1>
   <hr />
+  <div class="row">
   {% for work in queryset %}
+  <div class="col-4">
   <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{work.title}}</h5>
@@ -22,6 +29,8 @@
     <a href="{{ work.get_absolute_url }}" class="card-link">{{ work }}</a>
   </div>
   </div>
+</div>  
   {% endfor %}
+</div>  
 
 {% endblock %}

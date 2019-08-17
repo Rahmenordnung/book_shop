@@ -1,10 +1,15 @@
 {% extends "base.html" %}
 
 {% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
     <li class="breadcrumb-item " aria-current="page">
       <a href="{% url 'literature:works_list' %}">Works list</a>
     </li>
-    <li class="breadcrumb-item active" aria-current="page">{{work.title}}</li>
+    <li class="breadcrumb-item active" aria-current="page">{{work.title}}</li>  
+    </ol>
+    </nav>
+  
 {% endblock breadcrumb %}
 
 {% block content %}
@@ -13,7 +18,7 @@
   {% include "work_clip.html" with work=work %}  
   </main>
 
-  <aside class="col-md-8">
+  <aside class="col-xs-12 col-sm-12 col-md-4">
     <div class="card">
         <div class="card-header">
           Parts of a work

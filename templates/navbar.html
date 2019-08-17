@@ -13,6 +13,9 @@
         <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="{% url 'profile' %}">Account</a>  
+      </li>
+      <li class="nav-item">
       <a class="nav-link" href="{% url 'cart:complete_order_list' %}">
         {{ request.user|cart_item_count }}
         <i class="fas fa-shopping-cart"></i>
@@ -26,7 +29,9 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
       </li>
-      {% endif %}  
+      {% endif %}
+      
+      
       
        
         <li class="nav-item dropdown">

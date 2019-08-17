@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
 from .models import Work, Part, Text
@@ -28,6 +29,7 @@ def works_list(request):
   }
   return render(request, "works_list.html", context)
 
+@login_required
 def work_detail(request, slug):
   # display some details of the work presented
   work = get_object_or_404(Work, slug=slug)
@@ -38,6 +40,7 @@ def work_detail(request, slug):
   }
   return render(request, "work_detail.html", context)
 
+@login_required
 def part_detail(request, work_slug, part_number):
   part_qs = Part.objects \
     .filter(work__slug=work_slug) \
@@ -52,6 +55,7 @@ def part_detail(request, work_slug, part_number):
     return render(request, "part_detail.html", context)
   return Http404
 
+@login_required
 def text_detail(request, work_slug, part_number, text_number):
   text_qs = Text.objects \
     .filter(part__work__slug=work_slug) \

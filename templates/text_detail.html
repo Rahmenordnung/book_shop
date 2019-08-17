@@ -2,19 +2,23 @@
 {% load static %}
 
 {% block breadcrumb %}
-  
-    <li class="breadcrumb-item " aria-current="page">
-      <a href="{% url 'literature:works_list' %}">Works list</a>
-    </li>
-    <li class="breadcrumb-item " aria-current="page">
-      <a href="{{ text.part.work.get_absolute_url }}">{{ text.part.work.title }}</a>
-    </li>
-    <li class="breadcrumb-item" aria-current="page">
-    <a href="{{ text.part.get_absolute_url }}">{{ text.part.title }}</a>
-    </li>
-    <li class="breadcrumb-item active" aria-current="page">
-    {{ text.title }}
-    </li>
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item " aria-current="page">
+        <a href="{% url 'literature:works_list' %}">Works list</a>
+      </li>
+      <li class="breadcrumb-item " aria-current="page">
+        <a href="{{ text.part.work.get_absolute_url }}">{{ text.part.work.title }}</a>
+      </li>
+      <li class="breadcrumb-item" aria-current="page">
+      <a href="{{ text.part.get_absolute_url }}">{{ text.part.title }}</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">
+      {{ text.title }}
+      </li>  
+    </ol>
+    </nav>
+
 
 {% endblock breadcrumb %}
 

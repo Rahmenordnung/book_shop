@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 
 {% block breadcrumb %}
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
     <li class="breadcrumb-item " aria-current="page">
       <a href="{% url 'literature:works_list' %}">Works list</a>
     </li>
@@ -9,7 +11,10 @@
     </li>
     <li class="breadcrumb-item active" aria-current="page">
     {{ part }}
-    </li>
+    </li>  
+    </ol>
+    </nav>
+    
 {% endblock breadcrumb %}
 
 {% block content %}
