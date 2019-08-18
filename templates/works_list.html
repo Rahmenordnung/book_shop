@@ -16,7 +16,7 @@
   <div class="row">
   {% for work in queryset %}
   <div class="col-4">
-  <div class="card" style="width: 18rem;">
+  <div class="card" >
   <div class="card-body">
     <h5 class="card-title">{{work.title}}</h5>
     <h6 class="card-subtitle mb-2 text-muted">{{work.publication_date}}</h6>
@@ -26,6 +26,7 @@
           {% if work.maestros.count > 1 %} | {% endif %} 
       {% endfor %}  
     </p>
+    <p class="card-subtitle mb-2 text-muted">{{ work.get_category_display }}</p>
     <a href="{{ work.get_absolute_url }}" class="card-link">{{ work }}</a>
   </div>
   </div>

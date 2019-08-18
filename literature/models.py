@@ -10,6 +10,13 @@ from django.shortcuts import redirect, reverse
 #           Mention1            
 #           Mention2 
 
+# LITERATURE_CATEGORY  = (
+#   ('HR', 'Horror' ),
+#   ('LV', 'Love' ),
+#   ('RL', 'Reality' ),
+#   ('AV', 'Adventure' ),
+# )
+
 class UserLibrary(models.Model):
   works_owned = models.ManyToManyField('Work', blank=True)
   user = models.OneToOneField(
@@ -31,12 +38,11 @@ def post_user_signup_receiver(sender, instance, created, *args, **kwargs):
       
 post_save.connect(post_user_signup_receiver, sender=settings.AUTH_USER_MODEL)
 
-##      jzgjzgjgujz##
-
       
 class Maestro(models.Model):
   complete_name = models.CharField(max_length=50)
   country_maestro = models.CharField(max_length=50)
+  # category= models.CharField(choices=LITERATURE_CATEGORY, max_length=4)
   slug = models.SlugField()
   
   def __str__(self):
@@ -50,6 +56,7 @@ class Work(models.Model):
   slug = models.SlugField()
   cover = models.ImageField()
   price = models.FloatField()
+  
   
   def __str__(self):
     return self.title
