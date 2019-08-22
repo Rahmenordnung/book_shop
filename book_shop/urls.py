@@ -4,13 +4,18 @@ from django.contrib import admin
 from django.urls import path, include
 
 from clients.views import profile_view
+# from search import urls as urls_search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
-    path('accounts/profile/', profile_view, name='profile'),
+    path('account/profile/', profile_view, name='profile'),
     path('cart/', include('shopping_list.urls', namespace='cart')),
     path('', include('literature.urls', namespace='literature')),
+    
+    
+    # path('', include('searc.urls', namespace='search')),
+    
         
 ]
 

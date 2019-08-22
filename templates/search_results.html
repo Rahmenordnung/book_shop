@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Search Results</h1>
+
+ <ul>
+  {% for work in object_list %}
+    <li>
+      {{ work.title }}, {{ work.price }}
+    </li>
+  {% endfor %}
+</ul> 
+
+
+{% endblock content %}

@@ -28,7 +28,7 @@
       {% include "work_clip.html" with work=text.part.work %} 
     </main>
   <aside class="col-md-8">
-    <div class="card">
+    <div class="card text-center">
         <div class="card-header">
           Essays details
         </div>
@@ -58,7 +58,7 @@
 {% else %}
 <div class="text-center">
   <h4>Sorry to hear that! You can´t read this text yet. </h4>
-  <h4>You must <a href="#">buy this work</a> in order to view the essay related to it</h4>
+  <h4>You must <a href="{% url 'literature:works_list' %}">buy this work</a> in order to view the essay related to it</h4>
   <img src="{% static 'images/reading_stop.jpg' %}" />
   {% endif %}
 </div>

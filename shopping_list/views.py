@@ -48,14 +48,12 @@ def order_view(request):
 
 @login_required
 def checkout(request):
-    order_qs = Order.objects.filter(user=request.user, is_ordered=False)
+    order_qs = Order.objects.filter(user=request.user, item_checked=False)
     if order_qs.exists():
         order = order_qs[0]
     else:
         return Http404
-
     if request.method == "POST":
-
         try:
             # complete the order (ref code and set ordered to true)
             order.ref_code = create_ref_code()
@@ -79,9 +77,9 @@ def checkout(request):
             # add the book to the users book list
             works = [item.work for item in order.items.all()]
             for work in works:
-              request.user.userlibrary.works_owned.add()
+              request.user.userlibrary.works_owned.add(work)
 
-            order.is_ordered = True
+            order.item_checked = True
             order.save()
 
             # redirect to the users profile

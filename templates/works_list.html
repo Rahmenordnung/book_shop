@@ -14,23 +14,30 @@
   <h1>This is the Theater Works list</h1>
   <hr />
   <div class="row">
-  {% for work in queryset %}
+  {% for work in items %}
   <div class="col-4">
-  <div class="card" >
-  <div class="card-body">
-    <h5 class="card-title">{{work.title}}</h5>
-    <h6 class="card-subtitle mb-2 text-muted">{{work.publication_date}}</h6>
-    <p class="card-text">
-      {% for maestro in work.maestros.all %}
-          <span>{{ maestro }}</span>
-          {% if work.maestros.count > 1 %} | {% endif %} 
-      {% endfor %}  
-    </p>
-    <p class="card-subtitle mb-2 text-muted">{{ work.get_category_display }}</p>
-    <a href="{{ work.get_absolute_url }}" class="card-link">{{ work }}</a>
+    <div class="card text-center" style="width: 18rem;">
+      <img class="card-img-top" src="{{ work.cover.url }}" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title text-center">
+        <a href="{{ work.get_absolute_url }}" class="card-link">{{ work }}</a></h5>
+        <p class="card-text">
+          {% for maestro in work.maestros.all %}
+              <span class="text-center">{{ maestro }}</span>
+              {% if work.maestros.count > 1 %} | {% endif %} 
+          {% endfor %}
+        </p>
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item ">{{ work.description }}</li>
+        <li class="list-group-item "><i class="far fa-clock"></i>  {{work.publication_date}}</li>
+        <li class="list-group-item ">{{ work.price }} €</li>
+      </ul>
+      <div class="card-body">
+        <a href="{{ work.get_absolute_url }}" class="btn btn-primary text-center">{{work.title}}</a>
+      </div>
   </div>
-  </div>
-</div>  
+</div>
   {% endfor %}
 </div>  
 

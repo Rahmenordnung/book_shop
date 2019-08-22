@@ -30,10 +30,6 @@
         <a class="nav-link" href="{% url 'account_signup' %}">Sign up</a>
       </li>
       {% endif %}
-      
-      
-      
-       
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu" aria-labelledby="dropdown09">
@@ -43,8 +39,15 @@
           </div>
         </li>
       </ul>
-      <form class="form-inline my-2 my-md-0">
-        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-      </form>
+
+       {% comment %} <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q">
+        <button type="search">Search</button>
+      </form>  {% endcomment %}
+      
+      {% comment %} <form action="{% url 'search_results' %}" method="get">
+        <input name="q" type="text" placeholder="Search...">
+      </form> {% endcomment %}
+      
     </div>
   </nav>

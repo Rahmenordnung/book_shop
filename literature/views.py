@@ -1,12 +1,47 @@
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404
-from .models import Work, Part, Text
+from .models import Work, Part, Text, Maestro
 from shopping_list.models import Order, OrderItem
+from django.views.generic import TemplateView, ListView
+from .models import Work
+# from django.core.paginator import Paginator
+
+
+# class WorksPageView(TemplateView):
+#     template_name = 'works_list.html'
+
+# # class SearchResultsView(ListView):
+# #     model = Work
+# #     template_name = 'search_results.html'
+# #     def get_queryset(self): # new
+# #         query = self.request.GET.get('q')
+# #         object_list = Work.objects.filter(
+# #             Q(title__icontains=query) | Q(price__icontains=query)
+# #         )
+# #         return object_list
+
 
 OWNED = 'owned'
 IN_CART_CHECK = 'in_cart_check' 
 NOT_IN_CART_CHECK = 'not_in_cart_check'
+
+# def search(request):        
+#     if request.method == 'POST':      
+#         book_name =  request.POST.getlist('search')      
+#         try:
+#             status = Work.objects.filter(work__icontains=title)
+#             #Add_prod class contains a column called 'bookname'
+#         except Work.DoesNotExist:
+#             status = None
+#         return render(request,"search.html",{"works":status})
+#     else:
+#         return render(request,"search.html",{})
+
+# def results(request):    
+#   search_text = request.GET.get('q','results')    
+#   results = Work.objects.filter(title__icontains=search_text)    
+#   return results  # via render_to_response, of course
 
 def works_relate_property(request, work):
     if work in request.user.userlibrary.work_list():
@@ -22,11 +57,19 @@ def works_relate_property(request, work):
     return NOT_IN_CART_CHECK   
         
 def works_list(request):
-  # display all of the theater_work
-  queryset = Work.objects.all()         
+  # display all of the literary_work
   context = {
-    'queryset': queryset
+    'items': Work.objects.all()  
   }
+  # query_items = request.GET. get("q")
+  
+  # paginator = Paginator(Work, 1)
+  # page = request.GET.get('page')
+  # context = paginator.get_page(page)
+  
+  # if query_items: 
+  #   queryset_list = queryset_list.filter(Work.title__icontains=queryset_list)
+    
   return render(request, "works_list.html", context)
 
 @login_required

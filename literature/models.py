@@ -7,15 +7,21 @@ from django.shortcuts import redirect, reverse
 #     Opera
 #       Part     
 #         Text       
-#           Mention1            
-#           Mention2 
+#           Essay1            
+#           Essay2 
 
-# LITERATURE_CATEGORY  = (
-#   ('HR', 'Horror' ),
-#   ('LV', 'Love' ),
-#   ('RL', 'Reality' ),
-#   ('AV', 'Adventure' ),
-# )
+LITERATURE_CATEGORY  = (
+  ('HORROR', 'Horror' ),
+  ('LOVE', 'Love' ),
+  ('REALITY', 'Reality' ),
+  ('ADVENTURE', 'Adventure' ),
+)
+
+def get_categorie_display_value(value):
+  for v in LITERATURE_CATEGORY:
+    if v[0] == value:
+      return v[1]
+  return 'unknown category value'
 
 class UserLibrary(models.Model):
   works_owned = models.ManyToManyField('Work', blank=True)
@@ -42,21 +48,21 @@ post_save.connect(post_user_signup_receiver, sender=settings.AUTH_USER_MODEL)
 class Maestro(models.Model):
   complete_name = models.CharField(max_length=50)
   country_maestro = models.CharField(max_length=50)
-  # category= models.CharField(choices=LITERATURE_CATEGORY, max_length=4)
+  category= models.CharField(choices=LITERATURE_CATEGORY, max_length=8)
   slug = models.SlugField()
   
   def __str__(self):
-    return f"{self.complete_name} {self.country_maestro}"
+    return f"{self.complete_name} {self.country_maestro} {get_categorie_display_value(self.category)}"
+    
   
 class Work(models.Model):
   maestros = models.ManyToManyField(Maestro)
   title = models.CharField(max_length=50)
   publication_date = models.DateTimeField()
-  gendre = models.CharField(max_length=30)
-  slug = models.SlugField()
+  description = models.CharField(max_length=630)
+  slug = models.SlugField() #work description
   cover = models.ImageField()
   price = models.FloatField()
-  
   
   def __str__(self):
     return self.title
