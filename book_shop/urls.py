@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from clients.views import profile_view
-# from search import urls as urls_search
+from search import urls as urls_search
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -14,7 +14,7 @@ urlpatterns = [
     path('', include('literature.urls', namespace='literature')),
     
     
-    # path('', include('searc.urls', namespace='search')),
+    path('search/', include('search.urls')),
     
         
 ]

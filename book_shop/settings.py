@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     # personal apps
     'literature',
     'shopping_list',
-    'clients'
-    # 'search'
+    'clients',
+    'search'
 ]
 
 MIDDLEWARE = [
