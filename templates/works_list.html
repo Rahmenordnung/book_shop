@@ -19,7 +19,7 @@
 
       <div class="col-lg-3">
 
-        <h1 class="my-4">Shop Name</h1>
+        <h1 class="my-4">This is the Theater Works list</h1>
         <div class="list-group">
           <a href="#" class="list-group-item">Category 1</a>
           <a href="#" class="list-group-item">Category 2</a>
@@ -30,7 +30,7 @@
       <!-- /.col-lg-3 -->
 
       <div class="col-lg-9">
-
+      
         <div id="carouselExampleIndicators" class="carousel slide my-4" data-ride="carousel">
           <ol class="carousel-indicators">
             <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -59,38 +59,36 @@
         </div>
 
         <div class="row">
-        {% for work in items %}
-          <div class="col-lg-4 col-md-6 mb-4">
-          
-            <div class="card h-100">
-              <a href="#">
-              <img class="card-img-top" src="{{ work.cover.url }}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="{{ work.get_absolute_url }}">{{ work }}</a>
-                </h4>
-                <h5>{{ work.price }}</h5>
-                <p class="card-text">{{ work.description }}</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+          {% for work in items %}
+            <div class="col-lg-4 col-md-6 mb-4">
+            
+              <div class="card h-100">
+                <a href="#">
+                <img class="card-img-top" src="{{ work.cover.url }}" alt=""></a>
+                <div class="card-body">
+                  <h3 class="card-title">
+                    <a href="{{ work.get_absolute_url }}">{{ work }}</a>
+                  </h3>
+                  <h4>{{ work.price }} €</h4>
+                  <p class="card-text">{{ work.description }}</p>
+                </div>
+                <div class="card-footer">
+                  <p class="list-group-item "><i class="far fa-clock"></i>  {{work.publication_date}}</p>
+                  {% for maestro in work.maestros.all %}
+                    <span class="text-center">{{ maestro.category }}</span>
+                    {% if work.maestros.count > 1 %} | {% endif %} 
+                  {% endfor %}
+                  <small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+                </div>
               </div>
             </div>
-            
-          </div>
           {% endfor %}
-
-    
-
         </div>
         <!-- /.row -->
-
       </div>
       <!-- /.col-lg-9 -->
-
     </div>
     <!-- /.row -->
-
   </div>
   <!-- /.container -->
 
@@ -102,34 +100,7 @@
     <!-- /.container -->
   </footer>
     
-  <h1>This is the Theater Works list</h1>
-  <hr />
-  <div class="row">
-  {% for work in items %}
-  <div class="col-4">
-    <div class="card text-center" style="width: 18rem;">
-      <img class="card-img-top" src="{{ work.cover.url }}" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title text-center">
-        <a href="{{ work.get_absolute_url }}" class="card-link">{{ work }}</a></h5>
-        <p class="card-text">
-          {% for maestro in work.maestros.all %}
-              <span class="text-center">{{ maestro }}</span>
-              {% if work.maestros.count > 1 %} | {% endif %} 
-          {% endfor %}
-        </p>
-      </div>
-      <ul class="list-group list-group-flush">
-        <li class="list-group-item ">{{ work.description }}</li>
-        <li class="list-group-item "><i class="far fa-clock"></i>  {{work.publication_date}}</li>
-        <li class="list-group-item ">{{ work.price }} €</li>
-      </ul>
-      <div class="card-body">
-        <a href="{{ work.get_absolute_url }}" class="btn btn-primary text-center">{{work.title}}</a>
-      </div>
-  </div>
-</div>
-  {% endfor %}
-</div>  
+  
+   
 
 {% endblock %}
