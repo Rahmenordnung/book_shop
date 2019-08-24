@@ -11,10 +11,10 @@ from django.shortcuts import redirect, reverse
 #           Essay2 
 
 LITERATURE_CATEGORY  = (
-  ('HORROR', 'Horror' ),
-  ('LOVE', 'Love' ),
-  ('REALITY', 'Reality' ),
-  ('ADVENTURE', 'Adventure' ),
+  ('Horror', 'Horror' ),
+  ('Love', 'Love' ),
+  ('Reality', 'Reality' ),
+  ('Adventure', 'Adventure' ),
 )
 
 def get_categorie_display_value(value):
@@ -53,12 +53,19 @@ class Maestro(models.Model):
   
   def __str__(self):
     return f"{self.complete_name} {self.country_maestro} {get_categorie_display_value(self.category)}"
+ 
+class Category(models.Model):
+    name = models.CharField(max_length=20)
     
+    def __str__(self):
+        return self.name    
   
 class Work(models.Model):
   maestros = models.ManyToManyField(Maestro)
   title = models.CharField(max_length=50)
   publication_date = models.DateTimeField()
+  categories = models.ManyToManyField(Category)
+  views = models.IntegerField(default=0)
   description = models.CharField(max_length=630)
   slug = models.SlugField() #work description
   cover = models.ImageField()

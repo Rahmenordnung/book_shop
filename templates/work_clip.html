@@ -1,7 +1,8 @@
-<div class="card">
-  <div class="card-header">{{ work.title }}</div>
-    <img src="..{{ work.cover.url }}." class="card-img-top" alt="...">
+<div class="card text-center">
+  <div class="card-header"><h3>{{ work.title }}</h3></div>
+    <img src="{{ work.cover.url }}" class="card-img-top" alt="...">
     <div class="card-body">
+    <h4>{{ work.price }} €</h4>
       <p class="card-text">Published{{ work.publication_date }}</p>
   </div>
   {% if work_status != 'owned' %}

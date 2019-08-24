@@ -40,6 +40,20 @@
         </li>
       </ul>
 
+      <form method="GET" action=".">
+        <div class="form-row">
+            <div class="form-group col-12">
+                <div class="input-group">
+                    <input class="form-control py-2 border-right-0 border" type="search" name="title_contains" placeholder="Title contains..." />
+                    <span class="input-group-append">
+                        <div class="input-group-text bg-transparent">
+                            <i class="fa fa-search"></i>
+                        </div>
+                    </span>
+                </div>
+            </div>        
+        </div>
+
        {% comment %} <form action="{% url 'search' %}" method="get">
         <input type="text" name="q">
         <button type="search">Search</button>

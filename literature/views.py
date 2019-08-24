@@ -57,9 +57,13 @@ def works_relate_property(request, work):
     return NOT_IN_CART_CHECK   
         
 def works_list(request):
-  # display all of the literary_work
+  qs = Work.objects.all()
+  title_contains_query = request.GET.get('title_contains')
+  if title_contains_query != '' and title_contains_query is not None:
+    qs = qs.filter(title__icontains=title_contains_query)  
+ # display all of the literary_work
   context = {
-    'items': Work.objects.all()  
+    'queryset': qs  
   }
   # query_items = request.GET. get("q")
   
