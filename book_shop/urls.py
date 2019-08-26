@@ -12,6 +12,7 @@ urlpatterns = [
     path('account/profile/', profile_view, name='profile'),
     path('cart/', include('shopping_list.urls', namespace='cart')),
     path('', include('literature.urls', namespace='literature')),
+    path('', include('search.urls', namespace='search')),
     
     
     # path('search/', include('search_urls')),

@@ -63,7 +63,7 @@ def works_list(request):
     qs = qs.filter(title__icontains=title_contains_query)  
  # display all of the literary_work
   context = {
-    'queryset': qs  
+    'queryset': qs, 
   }
   # query_items = request.GET. get("q")
   

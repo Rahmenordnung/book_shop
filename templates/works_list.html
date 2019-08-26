@@ -70,12 +70,14 @@
                   <h4 class="card-title">
                     <a href="{{ work.get_absolute_url }}">{{ work }}</a>
                   </h4>
-                  <h5>$24.99</h5>
+                  <h5>{{ work.price }} €</h5>
                   <p class="card-text">{{ work.description }}</p>
+                  <p class="card-text">{{ work.publication_date }}</p>
+                  <p class="card-text">{{ work.views }}</p>
                 </div>
                 <div class="card-footer">
                 {% for maestro in work.maestros.all %}
-                  <span class="text-center bg-warning">{{ maestro.complete_name }}</span>
+                  <span class="text-center bg-warning">{{ maestro.completename }}</span>
                   <span class="text-center bg-success">{{ maestro.country_maestro }}</span>
                   <span class="text-center bg-info">{{ maestro.category }}</span>
                   {% if work.maestros.count > 1 %} | {% endif %} 

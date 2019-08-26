@@ -46,16 +46,24 @@ post_save.connect(post_user_signup_receiver, sender=settings.AUTH_USER_MODEL)
 
       
 class Maestro(models.Model):
-  complete_name = models.CharField(max_length=50)
+  completename = models.CharField(max_length=50)
   country_maestro = models.CharField(max_length=50)
   category= models.CharField(choices=LITERATURE_CATEGORY, max_length=8)
   slug = models.SlugField()
   
   def __str__(self):
-    return f"{self.complete_name} {self.country_maestro} {get_categorie_display_value(self.category)}"
+    return f"{self.completename} {self.country_maestro} {get_categorie_display_value(self.category)}"
  
 class Category(models.Model):
     name = models.CharField(max_length=20)
+    
+    categories = [
+    'Sport',
+    'Lifestyle',
+    'Music',
+    'Coding',
+    'Travelling'
+]
     
     def __str__(self):
         return self.name    
@@ -70,6 +78,9 @@ class Work(models.Model):
   slug = models.SlugField() #work description
   cover = models.ImageField()
   price = models.FloatField()
+  bestseller = models.BooleanField(default=False)
+  longbook = models.BooleanField(default=False)
+  worldwide_appreciated = models.BooleanField(default=False)
   
   def __str__(self):
     return self.title
