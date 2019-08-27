@@ -1,6 +1,8 @@
 from django.db.models import Q
 from django.shortcuts import render
-from literature.models import Work, Category
+from literature.models import Work, Category 
+# from django.shortcuts import render, get_object_or_404
+# Category
 
 def is_valid_search_queryparam(param):
   return param != '' and param is not None
@@ -17,9 +19,12 @@ def search_formularView(request):
   view_count_max = request.GET.get('view_count_max')
   date_min = request.GET.get('date_min')
   date_max = request.GET.get('date_max')
-  category = request.GET.get('category')
-  reviewed = request.GET.get('reviewed')
-  not_reviewed = request.GET.get('notReviewed')
+  bestseller = request.GET.get('bestseller')
+  not_bestseller = request.GET.get('notbestseller')
+  is_longbook = request.GET.get('longbook')
+  is_shortbook = request.GET.get('isshortbook')
+  worldwide_appreciated = request.GET.get('worldwide_appreciated')
+  underground_appreciation = request.GET.get('underground_appreciation')
   
   if is_valid_search_queryparam(title_contains_query):
     qs = qs.filter(title__icontains=title_contains_query)
@@ -42,14 +47,26 @@ def search_formularView(request):
   if is_valid_search_queryparam(date_max):
         qs = qs.filter(publication_date__lt=date_max)
   
-  if is_valid_search_queryparam(category) and category != 'Choose...':
-        qs = qs.filter(categories__name=category)
+  # if is_valid_search_queryparam(category) and category != 'Choose...':
+  #       qs = qs.filter(categories__name=category)
         
-  if reviewed == 'on':
-        qs = qs.filter(reviewed=True)
+  if bestseller == 'on':
+        qs = qs.filter(bestseller=True)
 
-  elif not_reviewed == 'on':
-        qs = qs.filter(reviewed=False)              
+  elif not_bestseller == 'on':
+        qs = qs.filter(bestseller=False) 
+        
+  if is_longbook == 'on':
+        qs = qs.filter(longbook=True)
+
+  elif is_shortbook == 'on':
+        qs = qs.filter(longbook=False)
+  
+  if worldwide_appreciated == 'on':
+        qs = qs.filter(worldwide_appreciated=True)
+
+  elif underground_appreciation == 'on':
+        qs = qs.filter(worldwide_appreciated=False)                          
         
   context = {
     'queryset': qs,
@@ -58,7 +75,10 @@ def search_formularView(request):
   }  
   return render(request, "search_form.html", context)
 
-
+# def get_products_by_category(request, category):
+#     category_we_are_retrieving = get_object_or_404(Category, type=category)
+#     products = Work.objects.filter(category = category_we_are_retrieving)
+#     return render(request, 'search_form.html', {'products': products, 'title': 'Browse all {}'.format(category_we_are_retrieving.type)})
 
 def search_function(request):
   literature_work = Work.objects.filter(name_icontains=request.GET['q'])
