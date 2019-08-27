@@ -120,6 +120,3 @@ class Essay(models.Model):
   
   def __str__(self):
     return f"{self.text.title}-{self.pk}"
-  
-     
-            
