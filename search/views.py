@@ -1,15 +1,14 @@
+    
 from django.db.models import Q
 from django.shortcuts import render
-from literature.models import Work, Category 
-# from django.shortcuts import render, get_object_or_404
-# Category
+from literature.models import Work
 
 def is_valid_search_queryparam(param):
   return param != '' and param is not None
 
 def search_formularView(request):
   qs = Work.objects.all() 
-  categories = Category.objects.all() 
+   
 #  display all of the literary_work
   
   title_contains_query = request.GET.get('title_contains')
@@ -47,8 +46,8 @@ def search_formularView(request):
   if is_valid_search_queryparam(date_max):
         qs = qs.filter(publication_date__lt=date_max)
   
-  # if is_valid_search_queryparam(category) and category != 'Choose...':
-  #       qs = qs.filter(categories__name=category)
+#   if is_valid_search_queryparam(category) and category != 'Choose...':
+#         qs = qs.filter(categories__name=category)
         
   if bestseller == 'on':
         qs = qs.filter(bestseller=True)
@@ -70,7 +69,7 @@ def search_formularView(request):
         
   context = {
     'queryset': qs,
-    'categories': categories
+    
       
   }  
   return render(request, "search_form.html", context)

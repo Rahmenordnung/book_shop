@@ -106,9 +106,9 @@
     <label for="category">Worlks category selector</label>
     <select id="category" class="form-control" name="category">
       <option selected>Choose...</option>
-      {% for cat in categories %}
+      {% comment %} {% for cat in categories %}
       <option value="{{ cat }}">{{ cat }}</option>
-      {% endfor %}
+      {% endfor %} {% endcomment %}
     </select>
   </div>
 </div>
@@ -159,7 +159,7 @@
         Underground known
       </label>
     </div>
-  </div> 
+  </div>
   <button type="submit" class="btn btn-primary">Search book</button>
 </form>
 

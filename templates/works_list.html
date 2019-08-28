@@ -9,7 +9,7 @@
 
 {% endblock breadcrumb %}
 
-{% include "footer.html" %}
+
 
 {% block content %}
 
@@ -86,7 +86,11 @@
                 </div>
               </div>
             </div>
-          {% endfor %}   
+          {% endfor %}
+          
+          {% comment %} <a href="{% url 'search:search_formularView' %}"></a> {% endcomment %}
+          {% comment %} <a name='formular' href="{% url 'formular' %}" class="list-group-item">kjhkjh</a> {% endcomment %}
+            
         </div>
         <!-- /.row -->
       </div>
@@ -96,16 +100,4 @@
   </div>
   <!-- /.container -->
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
-    </div>
-    <!-- /.container -->
-  </footer>
-        
-  
-    
-
-
-{% endblock %}
+  {% endblock %}

@@ -1,10 +1,8 @@
+// Create an instance of Elements
 var stripe = Stripe("pk_test_yTxMFneI3wTJspHZOheRwXhC006DQdlrgz");
 
-// Create an instance of Elements
 var elements = stripe.elements();
 
-
-//Custom styling can be passed to options when crearing Elements
 var style = {
     base: {
         color: "#32325d",
@@ -21,11 +19,8 @@ var style = {
     }
 };
 
-
-//Create an instance of the card Element
 var card = elements.create("card", { style: style });
 
-//Add an instance of the card Element into the 'card-element' <div>
 card.mount("#card-element");
 
 // Handle real-time validation errors from the card Element.
@@ -66,5 +61,5 @@ function stripeTokenHandler(token) {
     form.appendChild(hiddenInput);
 
     // Submit the form
-    form.submit();
+    form.onsubmit();
 }

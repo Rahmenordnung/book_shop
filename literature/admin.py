@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Maestro, Work, Text, Part, Essay, UserLibrary
+from .models import Maestro, Work, Text, Part, Essay, UserLibrary 
 
 admin.site.register(Maestro)
 admin.site.register(Work)

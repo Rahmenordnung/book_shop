@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Order, OrderItem , money_payment
+from .models import Order, OrderItem, money_payment
 
 
 admin.site.register(Order)

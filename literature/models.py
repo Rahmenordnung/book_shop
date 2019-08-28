@@ -54,17 +54,12 @@ class Maestro(models.Model):
   def __str__(self):
     return f"{self.completename} {self.country_maestro} {get_categorie_display_value(self.category)}"
  
-class Category(models.Model):
-  type = models.CharField(max_length=30, default='')
-    
-  def __str__(self):
-      return self.type    
-  
+
+       
 class Work(models.Model):
   maestros = models.ManyToManyField(Maestro)
   title = models.CharField(max_length=50)
   publication_date = models.DateTimeField()
-  category = models.ForeignKey(Category, on_delete=models.CASCADE)
   views = models.IntegerField(default=0)
   description = models.CharField(max_length=630)
   slug = models.SlugField() #work description
@@ -112,3 +107,5 @@ class Essay(models.Model):
   
   def __str__(self):
     return f"{self.text.title}-{self.pk}"
+  
+     

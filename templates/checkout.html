@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% include "footer.html" %}
 
 {% block content %}
 <link href="{% static 'css/stripe.css' %}" rel="stylesheet" />
@@ -25,6 +26,7 @@
     <button>Submit Payment</button>
   </form>
 
-<script src="{% static 'js/stripe_form.js' %}"></script>
+<script src="{% static 'static/js/stripe_form.js' %}"></script>
 
 {% endblock content %}
+

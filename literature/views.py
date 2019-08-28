@@ -116,5 +116,4 @@ def text_detail(request, work_slug, part_number, text_number):
       'work_status': work_status 
     }
     return render(request, "text_detail.html", context)
-  return Http404                 
-                
+  return Http404   
