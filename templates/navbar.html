@@ -1,4 +1,14 @@
 {% load template_tag_file %}  
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-D9JJCQ751F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-D9JJCQ751F');
+</script>
   
   <nav class="navbar navbar-expand-lg navbar-light bg-light rounded">
     <a class="navbar-brand" href="{% url 'literature:works_list' %}">Book Shop</a>
